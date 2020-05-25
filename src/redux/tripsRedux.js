@@ -20,8 +20,8 @@ export const getFilteredTrips = ({trips, filters}) => {
   return output;
 };
 
-export const getTripById = ({trips}, tripId) => {
-  const filtered = trips;
+export const getTripById = ({trips}, tripId) =>{
+  const filtered = trips.filter(trip => trip.tripId == tripId);
 
   // TODO - filter trips by tripId
 
@@ -30,7 +30,7 @@ export const getTripById = ({trips}, tripId) => {
 };
 
 export const getTripsForCountry = ({trips}, countryCode) => {
-  const filtered = trips;
+  const filtered = trips.filter(trip => trip.country.code == countryCode); // country bo spread operator w CountryContainer, code bo jest to key z Countries.js
 
   // TODO - filter trips by countryCode
 
