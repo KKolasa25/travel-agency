@@ -45,8 +45,11 @@ export default function reducer(statePart = [], action = {}) {
       };
     case CHANGE_DURATION:
       return {
-        ...statePart,
-        duration: action.payload,
+        ...statePart, // rozpakowanie spread operatora 
+        duration: {
+          ...statePart.duration, // rozpakowanie from i to ze spread operatora
+          [action.payload.type]: action.payload.value, // podmieniamy wartość from i to w ładunku akcji 
+        },
       };
     default:
       return statePart;
