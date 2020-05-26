@@ -12,16 +12,25 @@ export const getFilteredTrips = ({trips, filters}) => {
   }
 
   // TODO - filter by duration
-  if(filters.duration){
-    const pattern = new RegExp(filters.duration, 'i');
-    output = output.filter(trip => pattern.test(trip.duration));
-    console.log(filters.duration);
+  if (filters.duration.to && filters.duration.from) {
+    output = output.filter(trip => trip.days >= filters.duration.from && trip.days <= filters.duration.to);
+    // Filtrujemy wycieczki z wybranego przedzialu czasowego. Przekazujemy argument trip, sprawdzamy w nim wartość "days",
+    // gdzie wprowadzony "from" musi być większy lub równy wartości domyślnej "from" i jednocześnie wprowadzona wartość "to" musi być mniejsza lub równa od domyślnej wartości "to".
   }
+    
 
   // TODO - filter by tags
-  if(filters.tags){
-    const pattern = new RegExp(filters.tags, 'i');
-    output = output.filter(trip => pattern.test(trip.tags));
+  // Domyślnie wyświetlają się wszystkie wycieczki. Jeżeli wybierzemy jakis tag (czyli tablica tagów będzie rózna od 0) 
+  // to filtrujemy wycieczki przekazując do funckji argument "trip". Sprwadzamy nasz tag po kolei we wszystkich wycieczkach po tagach.
+  // jeżeli nasz wybrany tag znajdzie się w "tags" wycieczki to zostanie on wyświetlony.
+  if (filters.tags.length != 0) {
+    output = output.filter(trip => {
+      for (let tag of trip.tags) {
+        if (filters.tags.indexOf(tag) > -1) { // tagi z indexem wiekszym niz -1 (czyli wszystkie w tablicy od indexu 0)
+          return trip;
+        }
+      }
+    });
   }
 
   // TODO - sort by cost descending (most expensive goes first)
