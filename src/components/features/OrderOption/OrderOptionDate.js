@@ -8,6 +8,7 @@ const OrderOptionDate = ({ currentValue, setOptionValue }) => (
   <div>
     <DatePicker
       className={styles.input}
+      type="date"
       value={currentValue}
       selected={currentValue}
       onChange={setOptionValue}

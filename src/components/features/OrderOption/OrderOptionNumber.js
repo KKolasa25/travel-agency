@@ -21,7 +21,7 @@ OrderOptionNumber.propTypes = {
   limits: PropTypes.object,
   min: PropTypes.number,
   max: PropTypes.number,
-  currentValue: PropTypes.any,
+  currentValue: PropTypes.number,
   setOptionValue: PropTypes.func,
   price: PropTypes.string,
 };
