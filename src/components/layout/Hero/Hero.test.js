@@ -9,10 +9,10 @@ describe('Component Hero', () => {
   });
 
   it('should throw error without required props', () => {
-    expect(() => shallow(<Hero />)).toThrow();
+    expect(() => shallow(<Hero/>)).toThrow();
   });
 
-  it('should render correct title', () => {
+  it('should render correct title and image', () => {
     const expectedTitle = 'Lorem ipsum';
     const expectedImage = 'image.jpg';
     const component = shallow(<Hero titleText={expectedTitle} imageSrc={expectedImage} />);
@@ -29,5 +29,4 @@ describe('Component Hero', () => {
     expect(component.hasClass('small')).toBe(true);
     expect(component.hasClass('dummy')).toBe(true);
   });
-  
 });
