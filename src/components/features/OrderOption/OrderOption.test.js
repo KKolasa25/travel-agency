@@ -126,6 +126,28 @@ describe('Component OrderOption', () => {
           });
           break;
         }
+        case 'icons': {
+          it('contains div', () => {
+            const div = renderedSubcomponent.find('.Icon');
+            expect(div.length).toBe(1);
+
+            const emptyDiv = div.find('div[value=""]');
+            expect(emptyDiv.length).toBe(1);
+
+            const divIcon = div.find('div').not('[value=""]');
+            expect(divIcon.length).toBe(mockProps.values.length + 1);
+
+            expect(divIcon.at(1).prop('value')).toBe(mockProps.values[0].id);
+            expect(divIcon.at(2).prop('value')).toBe(mockProps.values[1].id);
+          });
+
+          it('should run setOrderOption function on click', () => {
+            renderedSubcomponent.find('.icon').at(2).simulate('click');
+            expect(mockSetOrderOption).toBeCalledTimes(1);
+            expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+          });
+          break;
+        }
       }
     });
   }
