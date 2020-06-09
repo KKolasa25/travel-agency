@@ -117,12 +117,12 @@ describe('Component OrderOption', () => {
           break;
         }
         case 'number': {
-          it('contains div and input', () => {
-            const div = renderedSubcomponent.find('.number');
-            expect(div.length).toBe(1);
+          it('contains div with class number and input with class inputSmall', () => {
+            const divNumber = renderedSubcomponent.find('.number');
+            expect(divNumber.length).toBe(1);
            
-            const input = div.find('input[type="number"]');
-            expect(input.length).toBe(1);
+            const inputSmallNumber = divNumber.find('input[type="number"]');
+            expect(inputSmallNumber.length).toBe(1);
           });
 
           it('should run setOrderOption function on change', () => {
@@ -133,34 +133,34 @@ describe('Component OrderOption', () => {
           break;
         }
         case 'icons': {
-          it('contains divs', () => {
-            const div = renderedSubcomponent.find('.Icon');
-            expect(div.length).toBe(1);
+          it('contains divs with class icon', () => {
+            const divIcon = renderedSubcomponent.find('.icon'); 
+            expect(divIcon.length).toBe(3);
 
-            const emptyDiv = div.find('div[value=""]');
-            expect(emptyDiv.length).toBe(1);
+            const emptyDiv = divIcon.find('div[value=""]');
+            expect(emptyDiv.length).toBe(0);
 
-            const divIcon = div.find('div').not('div[value=""]');
-            expect(divIcon.length).toBe(mockProps.values.length + 1); 
+            const divWithIcon = divIcon.find('.icon .icon'); 
+            expect(divWithIcon.length).toBe(mockProps.values.length); 
 
-            expect(divIcon.at(1).prop('value')).toBe(mockProps.values[0].id); 
-            expect(divIcon.at(2).prop('value')).toBe(mockProps.values[1].id); 
+            expect(divWithIcon.at(0).prop('value')).toBe(mockProps.values[0].id); 
+            expect(divWithIcon.at(1).prop('value')).toBe(mockProps.values[1].id); 
           });
 
           it('should run setOrderOption function on click', () => {
-            renderedSubcomponent.find('.icon').at(2).simulate('click');
+            renderedSubcomponent.find('.icon .icon').at(1).simulate('click');
             expect(mockSetOrderOption).toBeCalledTimes(1);
             expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
           });
           break;
         }
         case 'text': {
-          it('contains div and input', () => {
-            const div = renderedSubcomponent.find('div');
-            expect(div.length).toBe(1);
+          it('contains div with input type text', () => {
+            const divText = renderedSubcomponent.find('div');
+            expect(divText.length).toBe(1);
 
-            const input = div.find('input[type="text"]');
-            expect(input.length).toBe(1);
+            const inputText = divText.find('input[type="text"]');
+            expect(inputText.length).toBe(1);
           });
 
           it('should run setOrderOption function on change', () => {
@@ -171,11 +171,8 @@ describe('Component OrderOption', () => {
           break;
         }
         case 'date': {
-          it('contains div and datapicker', () => {
-            const div = renderedSubcomponent.find('div');
-            expect(div.length).toBe(1);
-
-            const datePicker = div.find(DatePicker);
+          it('contains DataPicker', () => {
+            const datePicker = renderedSubcomponent.find(DatePicker);
             expect(datePicker.length).toBe(1);
           });
 
@@ -188,11 +185,11 @@ describe('Component OrderOption', () => {
           break;
         }
         case 'checkboxes': {
-          it('contains div and input', () => {
-            const div = renderedSubcomponent.find('.checkboxes');
-            expect(div.length).toBe(1);
+          it('contains div with class checkboxes and input with type checkbox', () => {
+            const divCheckboxes = renderedSubcomponent.find('.checkboxes');
+            expect(divCheckboxes.length).toBe(1);
 
-            const checkboxInput = div.find('input[type="checkbox"]');
+            const checkboxInput = divCheckboxes.find('input[type="checkbox"]');
             expect(checkboxInput.length).toBe(mockProps.values.length);
             
             expect(checkboxInput.at(0).prop('value')).toBe(mockProps.values[0].id);
