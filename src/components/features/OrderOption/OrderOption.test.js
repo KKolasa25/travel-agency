@@ -183,6 +183,7 @@ describe('Component OrderOption', () => {
             expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: testValue});
           });
           break;
+          
         }
         case 'checkboxes': {
           it('contains div with class checkboxes and input with type checkbox', () => {
